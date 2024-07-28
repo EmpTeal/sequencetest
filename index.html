@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e6f3ff;
+            border-radius: 10px;
+        }
+        .sequence {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            font-size: 1em;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sequence Test</h1>
+        <form id="sequenceForm">
+            <div class="question">
+                <p class="sequence">1. 5, 10, 19, 32, 49, 70, ?</p>
+                <input type="number" id="answer1" required>
+            </div>
+            <div class="question">
+                <p class="sequence">2. 4, 7, 12, 20, 32, 48, 64, ?</p>
+                <input type="number" id="answer2" required>
+            </div>
+            <div class="question">
+                <p class="sequence">3. 3, 2, 2, 3, 8, ?</p>
+                <input type="number" id="answer3" required>
+            </div>
+            <button type="submit">Submit Answers</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        console.log("Script started");
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log("DOM fully loaded and parsed");
+            const form = document.getElementById('sequenceForm');
+            const resultDiv = document.getElementById('result');
+
+            if (form && resultDiv) {
+                console.log("Form and result div found");
+                form.addEventListener('submit', function(e) {
+                    console.log("Form submitted");
+                    e.preventDefault();
+                    const answers = [95, 64, 35];
+                    const userAnswers = [
+                        document.getElementById('answer1').value,
+                        document.getElementById('answer2').value,
+                        document.getElementById('answer3').value
+                    ];
+                    console.log("User answers:", userAnswers);
+                    let allCorrect = true;
+                    for (let i = 0; i < answers.length; i++) {
+                        if (parseInt(userAnswers[i]) !== answers[i]) {
+                            allCorrect = false;
+                            break;
+                        }
+                    }
+                    console.log("All correct?", allCorrect);
+                    if (allCorrect) {
+                        resultDiv.textContent = "Correct, Mom!";
+                        resultDiv.className = "correct";
+                    } else {
+                        resultDiv.textContent = "Sorry, that's not correct. Please try again!";
+                        resultDiv.className = "incorrect";
+                    }
+                    console.log("Result updated");
+                });
+            } else {
+                console.error("Form or result div not found");
+            }
+        });
+    </script>
+</body>
+</html>
